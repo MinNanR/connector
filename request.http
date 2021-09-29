@@ -1,0 +1,31 @@
+POST {{baseUrl}}/auth//login/password
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "min",
+  "password": "minnan35"
+}
+
+> {% client.global.set("token", response.body.data.authority); %}
+
+###
+POST {{baseUrl}}/connection/getConnectionList
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+POST {{baseUrl}}/connection/addConnection
+Content-Type: application/json
+Accept: application/json
+
+{
+  "host": "minnan.site",
+  "port": 3306,
+  "username": "Minnan",
+  "password": "minnan",
+  "url": "jdbc:mysql://minnan.site:3306/rental?serverTimezone=Asia/Shanghai&allowMultiQueries=true",
+  "dataSourceType": "MYSQL"
+}
+
+###

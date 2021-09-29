@@ -1,0 +1,35 @@
+server:
+  port: 8140
+
+jwt:
+  route:
+    authentication:
+      path: /connector/auth/login*/**, /css/**, /js/**,  /fonts/**, /img/**, /LOGO.svg
+  header: Authorization
+  expiration: 604800
+  secret: minnan
+  initiatedPassword: 123456
+
+connector:
+  db:
+    path: ${user.home}/.connector/db/connector
+
+spring:
+  datasource:
+#    data: classpath*:data/data.sql
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:${connector.db.path}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: false
+
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
